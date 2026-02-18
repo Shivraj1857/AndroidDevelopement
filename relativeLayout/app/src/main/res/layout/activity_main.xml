@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/firstlayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hello World!"
+        android:textSize="32sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_alignRight="@+id/firstlayout"
+
+        android:id="@+id/secondlayout"
+        android:layout_below="@+id/firstlayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ram ram bhau"
+        android:textSize="32sp"
+        />
+    <TextView
+        android:id="@+id/thirdlayout"
+        android:layout_below="@+id/secondlayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="relative layout"
+        android:textSize="32sp"
+        android:layout_alignParentEnd="true"
+
+
+        />
+
+</RelativeLayout>
