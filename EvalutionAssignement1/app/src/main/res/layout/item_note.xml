@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/noteRow"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="12dp"
+    android:background="@drawable/bg_note_card"
+    android:layout_marginBottom="10dp"
+    android:foreground="?attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true">
+
+<View
+android:id="@+id/vDot"
+android:layout_width="12dp"
+android:layout_height="12dp"
+android:background="@drawable/bg_dot"
+android:layout_gravity="center_vertical"/>
+
+<TextView
+android:id="@+id/tvNoteLine"
+android:layout_width="0dp"
+android:layout_height="wrap_content"
+android:layout_marginStart="12dp"
+android:layout_weight="1"
+android:textColor="@android:color/black"
+android:textSize="15sp"/>
+    </LinearLayout>

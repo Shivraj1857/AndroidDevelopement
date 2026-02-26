@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">EvalutionAssignement1</string>
+    <string-array name="note_categories">
+        <item>Work</item>
+        <item>Personal</item>
+        <item>Study</item>
+    </string-array>
+
+</resources>
