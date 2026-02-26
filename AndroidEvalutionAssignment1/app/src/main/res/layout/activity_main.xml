@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:background="#C8F6F4F4"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginEnd="14dp"
+        android:text="Quick-Note &amp; Share"
+        android:textColor="@color/black"
+        android:textSize="42sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editText2"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="36dp"
+        android:background="@drawable/edittext_skyblue_border"
+        android:hint="Type your note here..."
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView1" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="221dp"
+        android:layout_height="64dp"
+        android:layout_margin="16dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="108dp"
+        android:background="@drawable/rounded_background_for_edit_spinner"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="12dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText2">
+
+        <TextView
+            android:id="@+id/editTextNote"
+            android:layout_width="2dp"
+            android:layout_height="48dp"
+            android:layout_weight="0.4"
+            android:background="@android:color/transparent"
+            android:hint="Category |"
+
+            android:paddingTop="12dp"
+            android:paddingBottom="6dp" />
+
+        <Spinner
+            android:id="@+id/spinnerCategory"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="8dp"
+            android:layout_weight="0.5" />
+
+    </LinearLayout>
+
+    <Button
+        android:backgroundTint="#3479EB"
+        android:layout_width="115dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="16dp"
+        android:text="Save Note"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintStart_toEndOf="@+id/linearLayout"
+        app:layout_constraintTop_toBottomOf="@+id/editText2" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:text="Activity This Session:"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+    <LinearLayout
+        android:id="@+id/buttonContainer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="12dp"
+        android:background="#FFFFFF"
+        android:elevation="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+
+<!--        <Button-->
+<!--            android:backgroundTint="#3479EB"-->
+<!--            android:id="@+id/btnAdd"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_weight="1"-->
+<!--            android:text=" preview"-->
+<!--            android:drawableStart="@android:drawable/ic_input_add"-->
+<!--            android:padding="10dp"/>-->
+
+<!--        &lt;!&ndash; Second Button &ndash;&gt;-->
+<!--        <Button-->
+<!--            android:backgroundTint="#3479EB"-->
+<!--            android:id="@+id/btnDelete"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_weight="1"-->
+<!--            android:text=" share All"-->
+<!--            android:drawableStart="@drawable/share"-->
+<!--            android:layout_marginStart="8dp"-->
+<!--            android:padding="10dp"/>-->
+<com.google.android.material.button.MaterialButton
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:cornerRadius="10dp"
+    app:icon="@drawable/lightbulb_24px"
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
