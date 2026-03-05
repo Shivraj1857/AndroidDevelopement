@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="teal_700">#38D5BE</color>
+    <color name="home_back">#9810FA</color>
+    <color name="login_back">#E61876</color>
+    <color name="message_Back">#5C59EB</color>
+</resources>
