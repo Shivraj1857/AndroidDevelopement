@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#2487de"
+    tools:context=".Fragment_One">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="My first fragment"
+        android:textSize="38sp"
+        android:textStyle="bold"
+        android:textAlignment="center"/>
+
+
+
+</FrameLayout>
