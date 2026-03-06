@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="equation"
+            type="io.mastercoding.quadraticequationsolver.MyEquation" />
+    </data>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/wallpaper"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Quadratic Equaction Solver"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:textColor="@color/white"
+        android:text="@={equation.a}"
+        android:id="@+id/edit1"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="76dp"
+        android:layout_marginEnd="136dp"
+        android:hint="Enter a"
+        android:textColorHint="@color/white"
+        app:layout_constraintEnd_toStartOf="@+id/edit3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:textColor="@color/white"
+        android:text="@={equation.b}"
+        android:id="@+id/edit2"
+        android:layout_width="100dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="171dp"
+        android:hint="Enter b"
+        android:textColorHint="@color/white"
+        app:layout_constraintBaseline_toBaselineOf="@+id/edit1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/edit1" />
+
+    <EditText
+        android:textColor="@color/white"
+        android:text="@={equation.c}"
+        android:id="@+id/edit3"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="59dp"
+        android:hint="Enter C"
+        android:textColorHint="@color/white"
+        app:layout_constraintBaseline_toBaselineOf="@+id/edit2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/edit1" />
+
+    <Button
+        android:onClick="@{equation::solveEquation}"
+        android:id="@+id/btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="82dp"
+        android:text="SOLVE THE EQUATION"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        android:text="Result Text"
+        android:textSize="24sp"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
