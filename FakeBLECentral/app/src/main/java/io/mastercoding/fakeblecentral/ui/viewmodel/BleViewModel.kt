@@ -1,32 +1,35 @@
+package io.mastercoding.fakeblecentral.ui.viewmodel
+
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import io.mastercoding.fakeblecentral.data.BleCentralRepository
-import io.mastercoding.fakebleperipheral.ui.BleUiState
+import io.mastercoding.fakeblecentral.ui.BleUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
 class BleViewModel : ViewModel() {
 
-    private lateinit var repository: BleCentralRepository
+    private var repository: BleCentralRepository? = null
 
     private val _uiState = MutableStateFlow(BleUiState())
     val uiState = _uiState.asStateFlow()
 
     fun startConnection(context: Context) {
 
-        repository = BleCentralRepository(context)
+        if (repository == null) {
+            repository = BleCentralRepository(context)
+        }
 
-        repository.connectAndRead { value ->
+        repository?.connectAndRead(context) { value ->
 
-            // SIMPLE FIX: better parsing
             when {
-                value.contains("CONNECTED") -> {
+                value.startsWith("Connection: Connected") -> {
                     _uiState.value = _uiState.value.copy(
                         connectionState = "Connected"
                     )
                 }
 
-                value.contains("DISCONNECTED") -> {
+                value.startsWith("Connection: Disconnected") -> {
                     _uiState.value = _uiState.value.copy(
                         connectionState = "Disconnected"
                     )

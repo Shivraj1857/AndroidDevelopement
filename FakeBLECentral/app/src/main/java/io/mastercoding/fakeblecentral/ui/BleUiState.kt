@@ -1,6 +1,5 @@
-package io.mastercoding.fakebleperipheral.ui
+package io.mastercoding.fakeblecentral.ui
 
 data class BleUiState(
-    val connectionState: String = "Disconnected",
-    val temperature: String = "--"
+    val connectionState: String = "Disconnected"
 )

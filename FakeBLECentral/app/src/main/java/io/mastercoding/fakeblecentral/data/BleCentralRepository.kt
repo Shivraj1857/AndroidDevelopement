@@ -5,6 +5,8 @@ import android.bluetooth.*
 import android.bluetooth.le.ScanCallback
 import android.bluetooth.le.ScanResult
 import android.content.Context
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import io.mastercoding.fakeblecentral.BleConstants
 
@@ -13,9 +15,11 @@ class BleCentralRepository(
 ) {
 
     private val adapter = BluetoothAdapter.getDefaultAdapter()
+    private var isScanning = false
+    private val handler = Handler(Looper.getMainLooper())
 
     @SuppressLint("MissingPermission")
-    fun connectAndRead(callback: (String) -> Unit) {
+    fun connectAndRead(context: Context, callback: (String) -> Unit){
 
         val scanner = adapter.bluetoothLeScanner
 
@@ -30,8 +34,8 @@ class BleCentralRepository(
 
                 Log.d("CENTRAL", "Found: ${device.name} ${device.address}")
 
-                // ✅ FIX ADD HERE (FILTER)
-                if (device.name != "FakeBLEPeripheral") {
+                // FIX ADD HERE (FILTER)
+                if (device.name != "Bhau_BLE") {
                     return
                 }
 
@@ -42,7 +46,7 @@ class BleCentralRepository(
 //
 //                Log.d("CENTRAL", "Found: ${device.name} ${device.address}")
 //
-//                // ✅ REAL FILTER (SERVICE UUID BASED)
+//                //REAL FILTER (SERVICE UUID BASED)
 //                val hasService = result.scanRecord?.serviceUuids?.any {
 //                    it.uuid == BleConstants.SERVICE_UUID
 //                } == true
@@ -61,31 +65,21 @@ class BleCentralRepository(
                             gatt: BluetoothGatt,
                             status: Int,
                             newState: Int
-                        ) {
+                        ){
 
-                            val deviceName = gatt.device.name ?: "Unknown"
-                            val deviceAddress = gatt.device.address
+                            val name = gatt.device.name ?: "Unknown"
 
                             when (newState) {
 
                                 BluetoothProfile.STATE_CONNECTED -> {
-                                    Log.d("CENTRAL", "Connected to $deviceName ($deviceAddress)")
-                                    callback("Connection: Connected to $deviceName")
-
+                                    callback("Connection: Connected to $name")
                                     gatt.discoverServices()
                                 }
 
                                 BluetoothProfile.STATE_DISCONNECTED -> {
-                                    Log.d("CENTRAL", "Disconnected from $deviceName")
-                                    callback("Connection: Disconnected from $deviceName")
-
+                                    callback("Connection: Disconnected")
                                     gatt.close()
                                 }
-                            }
-
-                            if (status != BluetoothGatt.GATT_SUCCESS) {
-                                Log.e("CENTRAL", "Connection error status=$status")
-                                callback("Connection Error: $status")
                             }
                         }
 
@@ -138,5 +132,10 @@ class BleCentralRepository(
         }
 
         scanner.startScan(scanCallback)
+
+
     }
+
+
+
 }

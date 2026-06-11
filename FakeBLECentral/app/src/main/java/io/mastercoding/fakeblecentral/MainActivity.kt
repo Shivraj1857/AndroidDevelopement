@@ -4,20 +4,26 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.TextView
-import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import io.mastercoding.fakeblecentral.ui.viewmodel.BleViewModel
 import io.mastercoding.fakeblecentral.viewmodel.CentralViewModel
+import kotlinx.coroutines.launch
+import androidx.activity.viewModels
+
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var vm: CentralViewModel
+    private val viewModel: BleViewModel by viewModels()
+    private lateinit var connectionText: TextView
+    private lateinit var txt: TextView
 
     private val permissionLauncher =
         registerForActivityResult(
@@ -38,7 +44,11 @@ class MainActivity : AppCompatActivity() {
         vm = ViewModelProvider(this)[CentralViewModel::class.java]
 
         val btn = findViewById<Button>(R.id.btnScan)
-        val txt = findViewById<TextView>(R.id.txtData)
+        txt = findViewById<TextView>(R.id.txtData)
+        connectionText = findViewById(R.id.connectionText)
+
+        observeUiState()
+
 
         btn.setOnClickListener {
 
@@ -47,11 +57,16 @@ class MainActivity : AppCompatActivity() {
             } else {
                 requestBlePermissions()
             }
+
+            viewModel.startConnection(this)
+
         }
 
         vm.data.observe(this) {
+            Log.d("CentralVM", "observer: $it")
             txt.text = it
         }
+
     }
 
     private fun hasBlePermissions(): Boolean {
@@ -83,6 +98,19 @@ class MainActivity : AppCompatActivity() {
                     Manifest.permission.BLUETOOTH_CONNECT
                 )
             )
+        }
+    }
+
+    private fun observeUiState() {
+
+        lifecycleScope.launch {
+
+            viewModel.uiState.collect { state ->
+
+                Log.d("state", "conn state: ${state.connectionState}")
+                connectionText.text = state.connectionState
+                
+            }
         }
     }
 }

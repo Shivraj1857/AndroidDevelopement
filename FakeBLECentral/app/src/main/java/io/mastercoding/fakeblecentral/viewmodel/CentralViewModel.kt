@@ -1,6 +1,8 @@
 package io.mastercoding.fakeblecentral.viewmodel
 
 import android.app.Application
+import android.content.Context
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -16,7 +18,9 @@ class CentralViewModel(
     val data: LiveData<String> = _data
 
     fun scan() {
-        repo.connectAndRead { value ->
+        Log.d("CentralVM", "scan called")
+        repo.connectAndRead(getApplication<Application>()) { value ->
+            Log.d("CentralVM", "received: $value")
             _data.postValue(value)
         }
     }
