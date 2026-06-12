@@ -24,4 +24,5 @@ class CentralViewModel(
             _data.postValue(value)
         }
     }
+
 }

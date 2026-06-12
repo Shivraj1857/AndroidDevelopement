@@ -23,7 +23,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var vm: CentralViewModel
     private val viewModel: BleViewModel by viewModels()
     private lateinit var connectionText: TextView
+    private lateinit var btnReadDeviceInfo: Button
     private lateinit var txt: TextView
+    private lateinit var devinfotxt: TextView
 
     private val permissionLauncher =
         registerForActivityResult(
@@ -33,7 +35,8 @@ class MainActivity : AppCompatActivity() {
             val granted = result.values.all { it }
 
             if (granted) {
-                vm.scan()
+                //vm.scan()
+                viewModel.startConnection(this)
             }
         }
 
@@ -46,21 +49,31 @@ class MainActivity : AppCompatActivity() {
         val btn = findViewById<Button>(R.id.btnScan)
         txt = findViewById<TextView>(R.id.txtData)
         connectionText = findViewById(R.id.connectionText)
+        btnReadDeviceInfo=findViewById(R.id.btnReadInfo)
+        devinfotxt=findViewById(R.id.txtDeviceInfo)
 
-        observeUiState()
+
+        //observeUiState()
 
 
         btn.setOnClickListener {
 
             if (hasBlePermissions()) {
-                vm.scan()
+                //vm.scan()
+                viewModel.startConnection(this)
             } else {
                 requestBlePermissions()
             }
 
-            viewModel.startConnection(this)
+            //viewModel.startConnection(this)
 
         }
+        btnReadDeviceInfo.setOnClickListener {
+            viewModel.readDeviceInfo()
+            Log.d("CENTRAL", "Read Button Clicked")
+        }
+
+        observeUiState()
 
         vm.data.observe(this) {
             Log.d("CentralVM", "observer: $it")
@@ -102,14 +115,17 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun observeUiState() {
-
         lifecycleScope.launch {
 
             viewModel.uiState.collect { state ->
 
                 Log.d("state", "conn state: ${state.connectionState}")
                 connectionText.text = state.connectionState
-                
+                Log.d("info device", "Device Detail: ${state.deviceInfo}")
+                //devinfotxt.text = state.deviceInfo
+                devinfotxt.text =
+                    "Manufacturer: ${state.deviceInfo.manufacturer}\nFirmware: ${state.deviceInfo.firmware}"
+
             }
         }
     }

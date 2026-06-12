@@ -1,16 +1,17 @@
 package io.mastercoding.fakeblecentral.ui.viewmodel
 
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import io.mastercoding.fakeblecentral.data.BleCentralRepository
 import io.mastercoding.fakeblecentral.ui.BleUiState
+import io.mastercoding.fakeblecentral.ui.DeviceInfo
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
 class BleViewModel : ViewModel() {
 
     private var repository: BleCentralRepository? = null
-
     private val _uiState = MutableStateFlow(BleUiState())
     val uiState = _uiState.asStateFlow()
 
@@ -34,13 +35,17 @@ class BleViewModel : ViewModel() {
                         connectionState = "Disconnected"
                     )
                 }
-
-                else -> {
-                    _uiState.value = _uiState.value.copy(
-                        temperature = value
-                    )
-                }
             }
+        }
+    }
+    fun readDeviceInfo() {
+        Log.d("CENTRAL", "ViewModel readDeviceInfo")
+        repository?.readDeviceInfo { info: DeviceInfo ->
+
+            _uiState.value = _uiState.value.copy(
+                deviceInfo = info
+
+            )
         }
     }
 }
